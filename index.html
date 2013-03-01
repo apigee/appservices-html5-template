@@ -14,9 +14,32 @@
             - Enter your orgName below — it’s the username you picked when you signed up at apigee.com
             - Keep the appName as “sandbox”: it’s a context we automatically created for you. It’s completely open by default, but don’t worry, other apps you create are not!      */
 
-            var client = new Usergrid.Client({
-                orgName:'YOUR APIGEE.COM USERNAME',
+            var client = new Usergrid.Collection({
+                orgName:'usergrid',
                 appName:'sandbox'
+                var feed = new Usergrid.Collection({"client":client,"type":"cars"});
+                //make sire messages are pulled back in order
+                items.fetch{
+                    function(){
+                        var html=="";
+                        while(items.hastNextEntityI())
+                        var Items =item.getNextEntity(),
+                        content = message.get('title'),
+                        name = message.get('author');
+                        
+                        html += '(li)';
+                        html += '<h3>' + content + '</h3>';
+                        html += '<p>' + name +'</p>';
+                        html += '(/li)';
+                        }
+                        $("#messages-list").html(html);
+                        $("#messages-list").listview('refresh');
+                    },
+                    
+                    function(){
+                        
+                    }
+                }
             });
 
             
@@ -31,7 +54,8 @@
 
             var options = {
                 type:'book',
-                title:'the old man and the sea'
+                title:'this is my book'
+                
             };
 
 
@@ -43,7 +67,7 @@
             - This app will NOT work in Internet Explorer due to their lack of CORS support.
             - Please use Firefox, Chrome or Safari, etc. instead.      */
 
-            client.createEntity(options, function (error, response) { 
+            client.getEntity(options, function (error, response) { 
                 if (error) { // Error - the book was not saved properly
                     alert("Could not create the book. Did you enter your orgName (username) correctly on line 18 of index.html?");
                 } else { // Success - the book was created properly
